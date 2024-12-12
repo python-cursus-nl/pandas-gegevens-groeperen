@@ -1,7 +1,14 @@
 import pandas as pd
+from pathlib import Path
 
 
 def clean_data():
+    # Controleer eerst of het outputbestand al bestaat
+    output_path = Path("woz_opgeschoond.csv")
+    if output_path.exists():
+        print("Het bestand 'woz_opgeschoond.csv' bestaat al. Geen actie ondernomen.")
+        return
+
     # Laad de data met de juiste parameters
     df = pd.read_csv(
         "woz.csv",
@@ -47,7 +54,6 @@ def clean_data():
         "PV30  ": "Noord-Brabant",
         "PV31  ": "Limburg",
     }
-
     # Filter de data op alleen de regio's die we willen behouden
     # Dus: NL, vier regio's en alle provincies.
     df = df[df["Regio_Code"].isin(regio_mapping.keys())]
@@ -67,12 +73,10 @@ def clean_data():
     # Drop columns die niet meer nodig zijn
     df = df.drop(["Regio_Code", "Perioden", "ID"], axis=1)
 
-    # Verander volgorde kolommen
-    volgorde = ["Regio", "Decennium", "Jaar", "Gemiddelde WOZ-waarde"]
-    df = df[volgorde]
-
     # Sla het opgeschoonde bestand op
-    df.to_csv("woz_opgeschoond.csv", sep=";", index=False)
+    df.to_csv(output_path, sep=";", index=False)
+
+    print(f"Het bestand '{output_path}' is aangemaakt.")
 
 
 def load_data():

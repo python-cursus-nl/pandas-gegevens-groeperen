@@ -9,6 +9,7 @@ from berekeningen import (
 )
 
 if __name__ == "__main__":
+    # Schoon de data op
     clean_data()
 
     # Laad de data
