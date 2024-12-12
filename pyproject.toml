@@ -1,3 +1,10 @@
+[project]
+name = "pandas-groupby"
+version = "1"
+description = "Voorbeeldproject om te leren hoe je gegevens groepeert met `pandas`"
+authors = [{ name = "Erwin Matijsen", email = "erwin@python-cursus.nl" }]
+readme = "README.md"
+
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
